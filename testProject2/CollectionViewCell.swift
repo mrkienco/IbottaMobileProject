@@ -46,15 +46,13 @@ class CollectionViewCell: UICollectionViewCell {
         addSubview(offerCurrentValue)
         addSubview(offerName)
         addSubview(stackView)
-        
-        offerImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
-        offerImage.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-//        offerImage.heightAnchor.constraint(equalToConstant: 36).isActive = true
-//        offerImage.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        offerImage.contentMode = .scaleAspectFill
+        offerImage.topAnchor.constraint(equalTo: topAnchor, constant: 6).isActive = true
+        offerImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 6).isActive = true
+        offerImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -6).isActive = true
+        offerImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).isActive = true
+        offerImage.contentMode = .scaleAspectFit
         
         stackView.addArrangedSubview(offerImage)
-        //stackView.topAnchor.constraint(equalTo: topSeparatorView.bottomAnchor, constant: 4).isActive = true
         stackView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
