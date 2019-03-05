@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Anchorage
 
 struct Offer {
     let url: String?
@@ -28,6 +29,7 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = interItemSpacing
         layout.minimumLineSpacing = 24
@@ -35,12 +37,13 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = true
         collectionView.backgroundColor = UIColor.white
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(collectionView)
-        
+
         readJSONFromFile(fileName: "Offers")
     }
 
@@ -58,8 +61,7 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let marginsAndInsets = margin * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + interItemSpacing * CGFloat(cellsPerRow - 1)
         let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
-        return CGSize(width: itemWidth, height: itemWidth)
-        
+        return CGSize(width: itemWidth, height: itemWidth + 18)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,10 +69,10 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         let imageUrl = URL(string: offers[indexPath.item].url ?? "")
         let offerName = offers[indexPath.item].name ?? ""
         let currentValue = offers[indexPath.item].currentValue ?? ""
-        print(indexPath)
-        print(imageUrl as Any)
-        print(offerName)
-        print(currentValue)
+//        print(indexPath)
+//        print(imageUrl as Any)
+//        print(offerName)
+//        print(currentValue)
         cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue

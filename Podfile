@@ -7,5 +7,6 @@ target 'testProject2' do
 
   # Pods for testProject2
 pod 'SDWebImage'
+pod 'Anchorage'
 
 end

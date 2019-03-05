@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Anchorage
 
 class CollectionViewCell: UICollectionViewCell {
     
@@ -25,16 +26,7 @@ class CollectionViewCell: UICollectionViewCell {
         var name = UILabel()
         return name
     }()
-    
-    let stackView: UIStackView = {
-        let sv = UIStackView()
-        sv.axis  = NSLayoutConstraint.Axis.horizontal
-        sv.alignment = UIStackView.Alignment.center
-        sv.distribution = UIStackView.Distribution.fillEqually
-        sv.translatesAutoresizingMaskIntoConstraints = false;
-        return sv
-    }()
-    
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -42,19 +34,15 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func addViews() {
-        addSubview(offerImage)
-        addSubview(offerCurrentValue)
-        addSubview(offerName)
-        addSubview(stackView)
-        offerImage.topAnchor.constraint(equalTo: topAnchor, constant: 6).isActive = true
-        offerImage.leftAnchor.constraint(equalTo: leftAnchor, constant: 6).isActive = true
-        offerImage.rightAnchor.constraint(equalTo: rightAnchor, constant: -6).isActive = true
-        offerImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).isActive = true
-        offerImage.contentMode = .scaleAspectFit
         
-        stackView.addArrangedSubview(offerImage)
-        stackView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        let image = offerImage
+        self.addSubview(image)
+        image.horizontalAnchors == self.horizontalAnchors + 6
+        image.verticalAnchors == self.verticalAnchors + 6
+        image.contentMode = .scaleAspectFit
+//        offerCurrentValue.numberOfLines = 0
+//        offerCurrentValue.adjustsFontSizeToFitWidth = true
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
