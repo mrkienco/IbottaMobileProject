@@ -11,13 +11,14 @@ import SDWebImage
 import Anchorage
 
 struct Offer {
+    let id: Int?
     let url: String?
     let currentValue : String?
     let name: String?
 }
 
-class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
+class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+        
     var collectionView: UICollectionView!
     let cellId = "Cell"
     
@@ -29,6 +30,7 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.title = "Offers"
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = interItemSpacing
@@ -43,6 +45,7 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(collectionView)
+        //layout the collection view here, then i dont have to set
 
         readJSONFromFile(fileName: "Offers")
     }
@@ -56,6 +59,12 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin) //didn't know what to do with top/bottom so I used margin
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let offerDetailVC = OfferDetailViewController()
+        //let offerName = offers[indexPath.item].name ?? ""
+        self.navigationController?.pushViewController(offerDetailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -77,6 +86,7 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
         cell.offerName.text = offerName
+        //cell.selectionStyle = .none
         
         return cell
     }
@@ -89,6 +99,7 @@ class OfferViewController: UIViewController, UICollectionViewDelegateFlowLayout,
                 if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                     for item in json! {
                         let offer = Offer(
+                            id: item["id"] as? Int,
                             url: item["url"] as? String,
                             currentValue: item["current_value"] as? String,
                             name: item["name"] as? String

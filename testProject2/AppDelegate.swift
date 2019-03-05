@@ -15,9 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // This is where you setup the rootViewController
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = OfferViewController()
+        let offersVC = OffersViewController()
+        self.window?.rootViewController = UINavigationController(rootViewController: offersVC)
         self.window?.makeKeyAndVisible()
         return true
     }
