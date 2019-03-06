@@ -10,13 +10,6 @@ import UIKit
 import SDWebImage
 import Anchorage
 
-struct Offer {
-    let id: Int?
-    let url: String?
-    let currentValue : String?
-    let name: String?
-}
-
 class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
         
     var collectionView: UICollectionView!
@@ -50,7 +43,7 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         readJSONFromFile(fileName: "Offers")
     }
 
-    var offers = [Offer]()
+    var offers = [OfferDataModel]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          print(offers.count)
@@ -63,7 +56,7 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let offerDetailVC = OfferDetailViewController()
-        //let offerName = offers[indexPath.item].name ?? ""
+        offerDetailVC.offer = offers[indexPath.item]
         self.navigationController?.pushViewController(offerDetailVC, animated: true)
     }
     
@@ -98,11 +91,13 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
                 let data = try Data(contentsOf: fileUrl)
                 if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                     for item in json! {
-                        let offer = Offer(
-                            id: item["id"] as? Int,
+                        let offer = OfferDataModel(
+                            id: item["id"] as? String,
                             url: item["url"] as? String,
                             currentValue: item["current_value"] as? String,
-                            name: item["name"] as? String
+                            name: item["name"] as? String,
+                            description: item["description"] as? String,
+                            terms: item["terms"] as? String
                         )
                         offers.append(offer)
                     }

@@ -9,8 +9,10 @@
 import UIKit
 
 struct OfferDataModel {
-    let id: Int?
+    let id: String?
     let url: String?
     let currentValue : String?
     let name: String?
+    let description: String?
+    let terms: String?
 }

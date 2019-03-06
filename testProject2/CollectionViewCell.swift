@@ -18,7 +18,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     var offerCurrentValue : UILabel = {
         var label = UILabel()
-        //label.textColor = UIColor.yellow
         return label
     }()
     
@@ -29,7 +28,6 @@ class CollectionViewCell: UICollectionViewCell {
    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addViews()
     }
     
@@ -58,6 +56,7 @@ class CollectionViewCell: UICollectionViewCell {
         image.horizontalAnchors == self.horizontalAnchors + 6
         image.backgroundColor = #colorLiteral(red: 0.8775058125, green: 0.8775058125, blue: 0.8775058125, alpha: 1)
         image.contentMode = .scaleAspectFit
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
