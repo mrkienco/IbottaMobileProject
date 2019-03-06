@@ -57,7 +57,8 @@ class OfferDetailViewController: UIViewController {
         terms.adjustsFontSizeToFitWidth = true
         terms.heightAnchor == 35
         terms.horizontalAnchors == self.view.horizontalAnchors
-        terms.bottomAnchor == self.view.bottomAnchor - 10
+        terms.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//        terms.bottomAnchor == self.view.bottomAnchor - 10
         
         let description = offerDescription
         self.view.addSubview(description)
