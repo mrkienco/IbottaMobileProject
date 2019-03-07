@@ -71,10 +71,6 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let imageUrl = URL(string: offers[indexPath.item].url ?? "")
         let offerName = offers[indexPath.item].name ?? ""
         let currentValue = offers[indexPath.item].currentValue ?? ""
-//        print(indexPath)
-//        print(imageUrl as Any)
-//        print(offerName)
-//        print(currentValue)
         cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue

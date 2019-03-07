@@ -11,6 +11,12 @@ import Anchorage
 
 class OfferDetailViewController: UIViewController {
     
+    let defaults = UserDefaults.standard
+    
+    var favButton = UIButton(type: .custom)
+    let standardIcon = UIImage(named: "star_standard")
+    let favoriteIcon = UIImage(named: "star_favorited")
+    
     var offer = OfferDataModel(id: nil, url: nil, currentValue: nil, name: nil, description: nil, terms: nil)
     
     var viewController: UIViewController!
@@ -93,9 +99,44 @@ class OfferDetailViewController: UIViewController {
         self.view.addSubview(image)
         image.horizontalAnchors == self.view.horizontalAnchors
         image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        let standardSpacing: CGFloat = 100.0
+//        image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardSpacing)
+//        image.heightAnchor.constraint(equalToConstant: 100).isActive = true
         image.contentMode = .scaleAspectFit
-//        image.bottomAnchor == name.topAnchor
-
+        
+        //print(isFavorite())
+        
+        if isFavorite() {
+            favButton.setImage(favoriteIcon, for: .normal)
+        } else {
+            favButton.setImage(standardIcon, for: .normal)
+        }
+        
+        self.view.addSubview(favButton)
+        favButton.topAnchor == image.bottomAnchor
+        favButton.bottomAnchor == name.topAnchor
+        favButton.horizontalAnchors == self.view.horizontalAnchors
+        favButton.contentMode = .scaleAspectFit
+        favButton.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
     }
     
+    @objc func buttonTapped(sender: UIButton) {
+        var boolValue : Bool = defaults.bool(forKey: offer.id ?? "")//returns false if it doesn't exist in userDefaults
+        
+        if boolValue == false {
+            boolValue = true
+            favButton.setImage(favoriteIcon, for: .normal)
+        } else {
+            boolValue = false
+            favButton.setImage(standardIcon, for: .normal)
+        }
+        defaults.set(boolValue, forKey: offer.id!)
+        
+        //print(boolValue)
+    }
+    
+    func isFavorite() -> Bool {
+        let boolValue : Bool = defaults.bool(forKey: offer.id ?? "")//returns false if it doesn't exist in userDefaults        
+        return boolValue
+    }
 }
