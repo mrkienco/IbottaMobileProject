@@ -21,30 +21,11 @@ class OfferDetailViewController: UIViewController {
     
     var viewController: UIViewController!
     
-    var offerImage : UIImageView = {
-        var image = UIImageView()
-        return image
-    }()
-    
-    var offerCurrentValue : UILabel = {
-        var label = UILabel()
-        return label
-    }()
-    
-    var offerName : UILabel = {
-        var label = UILabel()
-        return label
-    }()
-    
-    var offerDescription : UILabel = {
-        var label = UILabel()
-        return label
-    }()
-    
-    var offerTerms : UILabel = {
-        var label = UILabel()
-        return label
-    }()
+    var offerImage = UIImageView()
+    var offerCurrentValue = UILabel()
+    var offerName = UILabel()
+    var offerDescription = UILabel()
+    var offerTerms = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,9 +79,6 @@ class OfferDetailViewController: UIViewController {
         self.view.addSubview(image)
         image.horizontalAnchors == self.view.horizontalAnchors
         image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        let standardSpacing: CGFloat = 100.0
-//        image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardSpacing)
-//        image.heightAnchor.constraint(equalToConstant: 100).isActive = true
         image.contentMode = .scaleAspectFit
      
         if FavoritesController().isFavorite(id: offer.id!) {
@@ -118,17 +96,15 @@ class OfferDetailViewController: UIViewController {
     }
     
     @objc func buttonTapped(sender: UIButton) {
-        
         var boolValue = FavoritesController().isFavorite(id: offer.id!)
         
-        if boolValue == false {            boolValue = true
+        if boolValue == false {
+            boolValue = true
         } else {
             boolValue = false
         }
         defaults.set(boolValue, forKey: offer.id!)
         setFavIcon(isFav: boolValue)
-        
-//        print("Now the value is: \(boolValue)")
     }
         
     func setFavIcon(isFav : Bool) {

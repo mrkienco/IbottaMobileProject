@@ -11,20 +11,12 @@ import Anchorage
 
 class CollectionViewCell: UICollectionViewCell {
     
-    var offerImage : UIImageView = {
-        var image = UIImageView()
-        return image
-    }()
+    var offerImage = UIImageView()
+    var offerCurrentValue = UILabel()
+    var offerName = UILabel()
+    var offerFavorited = UIImageView()
     
-    var offerCurrentValue : UILabel = {
-        var label = UILabel()
-        return label
-    }()
-    
-    var offerName : UILabel = {
-        var name = UILabel()
-        return name
-    }()
+    let favoriteIcon = UIImage(named: "star_favorited")
    
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +24,6 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func addViews() {
-        
         let name = offerName
         self.addSubview(name)
         name.numberOfLines = 0
@@ -57,9 +48,16 @@ class CollectionViewCell: UICollectionViewCell {
         image.backgroundColor = #colorLiteral(red: 0.8775058125, green: 0.8775058125, blue: 0.8775058125, alpha: 1)
         image.contentMode = .scaleAspectFit
         
+        let favIcon = offerFavorited
+        self.addSubview(favIcon)
+        favIcon.heightAnchor == 35
+        favIcon.widthAnchor == 35
+        favIcon.topAnchor == image.topAnchor + 6
+        favIcon.rightAnchor == image.rightAnchor - 6
+        favIcon.contentMode = .scaleAspectFit
     }
     
-    required init?(coder aDecoder: NSCoder) {
+        required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

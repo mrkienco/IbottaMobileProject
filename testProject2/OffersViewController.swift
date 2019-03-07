@@ -81,7 +81,11 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
         cell.offerName.text = offerName
-        //cell.selectionStyle = .none
+        if isFav {
+            cell.offerFavorited.image = UIImage(named: "star_favorited")
+        } else {
+            cell.offerFavorited.image = nil
+        }
         
         return cell
     }
