@@ -55,7 +55,6 @@ class OfferDetailViewController: UIViewController {
     }
     
     func addViews() {
-        
         let terms = offerTerms
         self.view.addSubview(terms)
         terms.text = offer.terms
@@ -103,13 +102,11 @@ class OfferDetailViewController: UIViewController {
 //        image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardSpacing)
 //        image.heightAnchor.constraint(equalToConstant: 100).isActive = true
         image.contentMode = .scaleAspectFit
-        
-        //print(isFavorite())
-        
-        if isFavorite() {
-            favButton.setImage(favoriteIcon, for: .normal)
+     
+        if FavoritesController().isFavorite(id: offer.id!) {
+            setFavIcon(isFav: true)
         } else {
-            favButton.setImage(standardIcon, for: .normal)
+            setFavIcon(isFav: false)
         }
         
         self.view.addSubview(favButton)
@@ -121,22 +118,24 @@ class OfferDetailViewController: UIViewController {
     }
     
     @objc func buttonTapped(sender: UIButton) {
-        var boolValue : Bool = defaults.bool(forKey: offer.id ?? "")//returns false if it doesn't exist in userDefaults
         
-        if boolValue == false {
-            boolValue = true
-            favButton.setImage(favoriteIcon, for: .normal)
+        var boolValue = FavoritesController().isFavorite(id: offer.id!)
+        
+        if boolValue == false {            boolValue = true
         } else {
             boolValue = false
-            favButton.setImage(standardIcon, for: .normal)
         }
         defaults.set(boolValue, forKey: offer.id!)
+        setFavIcon(isFav: boolValue)
         
-        //print(boolValue)
+//        print("Now the value is: \(boolValue)")
     }
-    
-    func isFavorite() -> Bool {
-        let boolValue : Bool = defaults.bool(forKey: offer.id ?? "")//returns false if it doesn't exist in userDefaults        
-        return boolValue
+        
+    func setFavIcon(isFav : Bool) {
+        if isFav {
+            favButton.setImage(favoriteIcon, for: .normal)
+        } else {
+            favButton.setImage(standardIcon, for: .normal)
+        }
     }
 }

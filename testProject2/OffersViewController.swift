@@ -11,7 +11,7 @@ import SDWebImage
 import Anchorage
 
 class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-        
+    
     var collectionView: UICollectionView!
     let cellId = "Cell"
     
@@ -19,6 +19,10 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     let interMargin: CGFloat = 8
     let interItemSpacing: CGFloat = 8
     let cellsPerRow = 2
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         
@@ -71,6 +75,8 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let imageUrl = URL(string: offers[indexPath.item].url ?? "")
         let offerName = offers[indexPath.item].name ?? ""
         let currentValue = offers[indexPath.item].currentValue ?? ""
+        let isFav = FavoritesController().isFavorite(id: offers[indexPath.item].id!)
+        print(isFav)
         cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
@@ -104,6 +110,5 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
             }
         }
     }
-
 }
 

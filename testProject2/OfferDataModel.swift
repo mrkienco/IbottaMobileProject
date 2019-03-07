@@ -8,6 +8,8 @@
 
 import UIKit
 
+let defaults = UserDefaults.standard
+
 struct OfferDataModel {
     let id: String?
     let url: String?
