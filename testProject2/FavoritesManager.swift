@@ -21,6 +21,7 @@ class FavoritesManager {
     
     func setFavorite(isFav : Bool) -> UIImage {
         var image = UIImage()
+        
         if isFav {
             image = favoriteIcon!
         } else {

@@ -80,8 +80,8 @@ class OfferDetailViewController: UIViewController {
         image.contentMode = .scaleAspectFit
         image.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         
-        let boolValue = FavoritesManager().isFavorite(id: offer.id!)
-        let icon = FavoritesManager().setFavorite(isFav: boolValue)
+        let isFavorite = FavoritesManager().isFavorite(id: offer.id!)
+        let icon = FavoritesManager().setFavorite(isFav: isFavorite)
         favButton.setImage(icon, for: .normal)
         
         self.view.addSubview(favButton)
@@ -94,10 +94,10 @@ class OfferDetailViewController: UIViewController {
     }
     
     @objc func buttonTapped(sender: UIButton) {
-        var boolValue = FavoritesManager().isFavorite(id: offer.id!)
-        boolValue.toggle()//sets bool value to true/false
-        defaults.set(boolValue, forKey: offer.id!)
-        let icon = FavoritesManager().setFavorite(isFav: boolValue)
+        var isFavorite = FavoritesManager().isFavorite(id: offer.id!)
+        isFavorite.toggle()//sets bool value to true/false
+        defaults.set(isFavorite, forKey: offer.id!)
+        let icon = FavoritesManager().setFavorite(isFav: isFavorite)
         favButton.setImage(icon, for: .normal)
     }
 }

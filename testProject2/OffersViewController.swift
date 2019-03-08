@@ -90,15 +90,11 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let offerName = offers[indexPath.item].name ?? ""
         let currentValue = offers[indexPath.item].currentValue ?? ""
         let isFav = FavoritesManager().isFavorite(id: offers[indexPath.item].id!)
+
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
         cell.offerName.text = offerName
-//        cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        if isFav {
-            cell.offerFavorited.image = UIImage(named: "star_favorited")
-        } else {
-            cell.offerFavorited.image = nil
-        }
+        cell.offerFavorited.image = isFav ? FavoritesManager().setFavorite(isFav: isFav) : nil
         
         return cell
     }
