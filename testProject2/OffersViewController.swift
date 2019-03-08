@@ -73,7 +73,7 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
 //        return CGSize(width: width, height: width)
 //    }
     
-    //try not to use this
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
     }
@@ -89,8 +89,7 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let imageUrl = URL(string: offers[indexPath.item].url ?? "")
         let offerName = offers[indexPath.item].name ?? ""
         let currentValue = offers[indexPath.item].currentValue ?? ""
-        let isFav = FavoritesController().isFavorite(id: offers[indexPath.item].id!)
-        print(isFav)
+        let isFav = FavoritesManager().isFavorite(id: offers[indexPath.item].id!)
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
         cell.offerName.text = offerName

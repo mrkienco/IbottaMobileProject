@@ -31,7 +31,6 @@ class OfferDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         self.title = "Offer Detail"
-        print(offer)
         addViews()
     }
     
@@ -77,40 +76,28 @@ class OfferDetailViewController: UIViewController {
         image.sd_setImage(with: imageUrl)
         self.view.addSubview(image)
         image.horizontalAnchors == self.view.horizontalAnchors
-        image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        image.topAnchor == self.view.safeAreaLayoutGuide.topAnchor + 10
         image.contentMode = .scaleAspectFit
-     
-        if FavoritesController().isFavorite(id: offer.id!) {
-            setFavIcon(isFav: true)
-        } else {
-            setFavIcon(isFav: false)
-        }
+        image.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        
+        let boolValue = FavoritesManager().isFavorite(id: offer.id!)
+        let icon = FavoritesManager().setFavorite(isFav: boolValue)
+        favButton.setImage(icon, for: .normal)
         
         self.view.addSubview(favButton)
-        favButton.topAnchor == image.bottomAnchor
-        favButton.bottomAnchor == name.topAnchor
-        favButton.horizontalAnchors == self.view.horizontalAnchors
+        favButton.heightAnchor == 50
+        favButton.widthAnchor == 50
+        favButton.topAnchor == image.topAnchor + 10
+        favButton.rightAnchor == image.rightAnchor - 10
         favButton.contentMode = .scaleAspectFit
         favButton.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
     }
     
     @objc func buttonTapped(sender: UIButton) {
-        var boolValue = FavoritesController().isFavorite(id: offer.id!)
-        
-        if boolValue == false {
-            boolValue = true
-        } else {
-            boolValue = false
-        }
+        var boolValue = FavoritesManager().isFavorite(id: offer.id!)
+        boolValue.toggle()//sets bool value to true/false
         defaults.set(boolValue, forKey: offer.id!)
-        setFavIcon(isFav: boolValue)
-    }
-        
-    func setFavIcon(isFav : Bool) {
-        if isFav {
-            favButton.setImage(favoriteIcon, for: .normal)
-        } else {
-            favButton.setImage(standardIcon, for: .normal)
-        }
+        let icon = FavoritesManager().setFavorite(isFav: boolValue)
+        favButton.setImage(icon, for: .normal)
     }
 }
