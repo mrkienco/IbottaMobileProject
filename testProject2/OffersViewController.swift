@@ -15,6 +15,10 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     var collectionView: UICollectionView!
     let cellId = "Cell"
     
+//    let bottomMargin: CGFloat = 24
+//    let interMargin: CGFloat = 8
+//    let cellsPerRow = 2
+    
     let margin: CGFloat = 12
     let interMargin: CGFloat = 8
     let interItemSpacing: CGFloat = 8
@@ -30,6 +34,9 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         self.title = "Offers"
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.minimumInteritemSpacing = interMargin
+//        layout.minimumLineSpacing = bottomMargin
+        
         layout.minimumInteritemSpacing = interItemSpacing
         layout.minimumLineSpacing = 24
         
@@ -42,7 +49,6 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(collectionView)
-        //layout the collection view here, then i dont have to set
 
         readJSONFromFile(fileName: "Offers")
     }
@@ -50,24 +56,32 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     var offers = [OfferDataModel]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         print(offers.count)
          return offers.count
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin) //didn't know what to do with top/bottom so I used margin
-    }
-    
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let offerDetailVC = OfferDetailViewController()
         offerDetailVC.offer = offers[indexPath.item]
         self.navigationController?.pushViewController(offerDetailVC, animated: true)
     }
     
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        //let width = (collectionView.bounds.size.width / CGFloat(cellsPerRow)) - (interMargin / 2)
+//        let width = (collectionView.bounds.size.width / CGFloat(cellsPerRow)) - (15) // possibly cellMargin / 2
+//        print("Width of device: \(collectionView.bounds.size.width)")
+//        print("Formula returns: \(width)")
+//        return CGSize(width: width, height: width)
+//    }
+    
+    //try not to use this
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let marginsAndInsets = margin * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + interItemSpacing * CGFloat(cellsPerRow - 1)
-        let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
-        return CGSize(width: itemWidth, height: itemWidth + 18)
+        let margins = margin * 2 + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + interItemSpacing * CGFloat(cellsPerRow - 1)//played around with this and still not 100% sure why -1 works
+        let width = ((collectionView.bounds.size.width - margins) / CGFloat(cellsPerRow))
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,10 +91,10 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         let currentValue = offers[indexPath.item].currentValue ?? ""
         let isFav = FavoritesController().isFavorite(id: offers[indexPath.item].id!)
         print(isFav)
-        cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
         cell.offerName.text = offerName
+//        cell.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         if isFav {
             cell.offerFavorited.image = UIImage(named: "star_favorited")
         } else {

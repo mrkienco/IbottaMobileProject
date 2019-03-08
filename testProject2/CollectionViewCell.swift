@@ -21,43 +21,66 @@ class CollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
+        configureViews()
     }
     
     func addViews() {
         let name = offerName
         self.addSubview(name)
-        name.numberOfLines = 0
-        name.adjustsFontSizeToFitWidth = true
-        name.heightAnchor == 35
         name.bottomAnchor == self.bottomAnchor
         name.horizontalAnchors == self.horizontalAnchors
         
         let currentValue = offerCurrentValue
         self.addSubview(currentValue)
-        currentValue.numberOfLines = 0
-        currentValue.adjustsFontSizeToFitWidth = true
-        currentValue.heightAnchor == 35
         currentValue.bottomAnchor == name.topAnchor
         currentValue.horizontalAnchors == self.horizontalAnchors
         
+        let imageBackground = UIView()
+        self.addSubview(imageBackground)
+        imageBackground.topAnchor == self.topAnchor
+        imageBackground.bottomAnchor == currentValue.topAnchor - 8
+        imageBackground.horizontalAnchors == self.horizontalAnchors
+        imageBackground.backgroundColor = #colorLiteral(red: 0.8775058125, green: 0.8775058125, blue: 0.8775058125, alpha: 1)
+        
         let image = offerImage
         self.addSubview(image)
-        image.topAnchor == self.topAnchor + 6
-        image.bottomAnchor == currentValue.topAnchor
-        image.horizontalAnchors == self.horizontalAnchors + 6
-        image.backgroundColor = #colorLiteral(red: 0.8775058125, green: 0.8775058125, blue: 0.8775058125, alpha: 1)
+        image.verticalAnchors == imageBackground.verticalAnchors + 6
+        image.horizontalAnchors == imageBackground.horizontalAnchors + 6
+//        image.backgroundColor = #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)
         image.contentMode = .scaleAspectFit
         
         let favIcon = offerFavorited
         self.addSubview(favIcon)
         favIcon.heightAnchor == 35
         favIcon.widthAnchor == 35
-        favIcon.topAnchor == image.topAnchor + 6
-        favIcon.rightAnchor == image.rightAnchor - 6
+        favIcon.topAnchor == image.topAnchor + 3
+        favIcon.rightAnchor == image.rightAnchor - 3
         favIcon.contentMode = .scaleAspectFit
     }
     
-        required init?(coder aDecoder: NSCoder) {
+    func configureViews() {
+        let name = offerName
+        name.setNameLabel()
+        name.numberOfLines = 1
+        
+        let currentValue = offerCurrentValue
+        currentValue.setCurrentValueLabel()
+        currentValue.numberOfLines = 1
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension UILabel {
+    func setNameLabel() {
+        self.font = UIFont(name: "AvenirNext-Regular", size: 11)
+        self.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+    }
+    
+    func setCurrentValueLabel() {
+        self.font = UIFont(name: "AvenirNext-DemiBold", size: 12)
+        self.textColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
     }
 }
