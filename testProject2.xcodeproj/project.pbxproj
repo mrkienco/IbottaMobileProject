@@ -12,7 +12,7 @@
 		E19476A82229D7A100353E1D /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19476A72229D7A100353E1D /* OffersViewController.swift */; };
 		E19476AD2229D7A400353E1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E19476AC2229D7A400353E1D /* Assets.xcassets */; };
 		E19476B02229D7A400353E1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E19476AE2229D7A400353E1D /* LaunchScreen.storyboard */; };
-		E19476B82229DF6600353E1D /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19476B72229DF6600353E1D /* CollectionViewCell.swift */; };
+		E19476B82229DF6600353E1D /* OfferCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19476B72229DF6600353E1D /* OfferCollectionViewCell.swift */; };
 		E19476BA2229E81700353E1D /* Offers.json in Resources */ = {isa = PBXBuildFile; fileRef = E19476B92229E81700353E1D /* Offers.json */; };
 		E19A64AE222F045500D306AF /* OfferDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A64AD222F045500D306AF /* OfferDetailViewController.swift */; };
 		E19A64B0222F165D00D306AF /* OfferDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A64AF222F165D00D306AF /* OfferDataModel.swift */; };
@@ -29,7 +29,7 @@
 		E19476AC2229D7A400353E1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E19476AF2229D7A400353E1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E19476B12229D7A400353E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E19476B72229DF6600353E1D /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		E19476B72229DF6600353E1D /* OfferCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferCollectionViewCell.swift; sourceTree = "<group>"; };
 		E19476B92229E81700353E1D /* Offers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Offers.json; sourceTree = "<group>"; };
 		E19A64AD222F045500D306AF /* OfferDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferDetailViewController.swift; sourceTree = "<group>"; };
 		E19A64AF222F165D00D306AF /* OfferDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferDataModel.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				E19476A52229D7A100353E1D /* AppDelegate.swift */,
-				E19476B72229DF6600353E1D /* CollectionViewCell.swift */,
+				E19476B72229DF6600353E1D /* OfferCollectionViewCell.swift */,
 				E19A64AF222F165D00D306AF /* OfferDataModel.swift */,
 				E19A64AD222F045500D306AF /* OfferDetailViewController.swift */,
 				E19476A72229D7A100353E1D /* OffersViewController.swift */,
@@ -226,7 +226,7 @@
 				E19A64B0222F165D00D306AF /* OfferDataModel.swift in Sources */,
 				E19A64AE222F045500D306AF /* OfferDetailViewController.swift in Sources */,
 				E19476A62229D7A100353E1D /* AppDelegate.swift in Sources */,
-				E19476B82229DF6600353E1D /* CollectionViewCell.swift in Sources */,
+				E19476B82229DF6600353E1D /* OfferCollectionViewCell.swift in Sources */,
 				E1B39C392231B4AE0077E05E /* FavoritesManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

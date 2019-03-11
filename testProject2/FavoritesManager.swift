@@ -15,14 +15,25 @@ class FavoritesManager {
     let favoriteIcon = UIImage(named: "star_favorited")
     
     func isFavorite(id : String) -> Bool {
-        let boolValue : Bool = defaults.bool(forKey: id)//returns false if it doesn't exist in userDefaults
-        return boolValue
+        return defaults.bool(forKey: id)
     }
     
     func setFavorite(isFav : Bool) -> UIImage {
         var image = UIImage()
         image = isFav ? favoriteIcon! : standardIcon!
+        //defaults.set(isFavorite, forKey: offer.id!) refactor this and return void
+        //dont return images here, do that in the VC
         return image
     }
+    
+//    func saveFavorite(with id : String) {
+//        defaults.set()
+//    }
+    
+//    func toggleFavorite(id : String) -> Bool {
+//        let isFav = !isFavorite(id: id)
+//        defaults.set(isFav, forKey: id)
+//        return isFav
+//    }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 let defaults = UserDefaults.standard
 
-struct OfferDataModel {
+struct OfferDataModel : Encodable {
     let id: String?
     let url: String?
     let currentValue : String?

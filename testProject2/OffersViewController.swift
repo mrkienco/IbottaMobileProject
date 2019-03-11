@@ -12,7 +12,9 @@ import Anchorage
 
 class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    var collectionView: UICollectionView!
+    var collectionView : UICollectionView!
+    //var collectionView = UICollectionView()
+    
     let cellId = "Cell"
     
 //    let bottomMargin: CGFloat = 24
@@ -43,12 +45,13 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.showsVerticalScrollIndicator = true
         collectionView.backgroundColor = UIColor.white
-        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(OfferCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(collectionView)
+        collectionView.edgeAnchors == self.view.edgeAnchors
+        
 
         readJSONFromFile(fileName: "Offers")
     }
@@ -85,10 +88,12 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CollectionViewCell
+        //create variable for offers[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OfferCollectionViewCell
         let imageUrl = URL(string: offers[indexPath.item].url ?? "")
         let offerName = offers[indexPath.item].name ?? ""
         let currentValue = offers[indexPath.item].currentValue ?? ""
+        
         let isFav = FavoritesManager().isFavorite(id: offers[indexPath.item].id!)
 
         cell.offerImage.sd_setImage(with: imageUrl)
@@ -99,7 +104,9 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         return cell
     }
     
-    func readJSONFromFile(fileName: String) {
+    //how to do this in the background thread
+    func readJSONFromFile(fileName: String) {//consider a new class that handles all of this
+        //look into codable, get offerdatamodel to conform to that
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
             do {
                 let fileUrl = URL(fileURLWithPath: path)
@@ -119,7 +126,7 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
                 }
                 
             } catch {
-                
+                print(error)
             }
         }
     }

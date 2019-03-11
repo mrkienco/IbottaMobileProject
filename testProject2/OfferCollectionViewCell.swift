@@ -9,7 +9,7 @@
 import UIKit
 import Anchorage
 
-class CollectionViewCell: UICollectionViewCell {
+class OfferCollectionViewCell: UICollectionViewCell {
     
     var offerImage = UIImageView()
     var offerCurrentValue = UILabel()
@@ -41,6 +41,7 @@ class CollectionViewCell: UICollectionViewCell {
         imageBackground.bottomAnchor == currentValue.topAnchor - 8
         imageBackground.horizontalAnchors == self.horizontalAnchors
         imageBackground.backgroundColor = #colorLiteral(red: 0.8775058125, green: 0.8775058125, blue: 0.8775058125, alpha: 1)
+        imageBackground.layer.cornerRadius = 5.0
         
         let image = offerImage
         self.addSubview(image)
