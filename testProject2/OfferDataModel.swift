@@ -10,11 +10,20 @@ import UIKit
 
 let defaults = UserDefaults.standard
 
-struct OfferDataModel : Encodable {
+struct OfferDataModel : Codable {
     let id: String?
     let url: String?
     let currentValue : String?
     let name: String?
     let description: String?
     let terms: String?
+    
+    enum CodingKeys : String, CodingKey {
+        case id
+        case url
+        case name
+        case description
+        case terms
+        case currentValue = "current_value"
+    }
 }

@@ -26,6 +26,8 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     let interItemSpacing: CGFloat = 8
     let cellsPerRow = 2
     
+    var offers = [OfferDataModel]()
+    
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
@@ -53,10 +55,10 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         collectionView.edgeAnchors == self.view.edgeAnchors
         
 
-        readJSONFromFile(fileName: "Offers")
+        offers = OffersAPI().readJSONFromFile(fileName: "Offers")
     }
-
-    var offers = [OfferDataModel]()
+    
+//    var offers = OffersAPI().readJSONFromFile(fileName: "Offers")
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          return offers.count
@@ -105,30 +107,21 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     //how to do this in the background thread
-    func readJSONFromFile(fileName: String) {//consider a new class that handles all of this
-        //look into codable, get offerdatamodel to conform to that
-        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
-            do {
-                let fileUrl = URL(fileURLWithPath: path)
-                let data = try Data(contentsOf: fileUrl)
-                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
-                    for item in json! {
-                        let offer = OfferDataModel(
-                            id: item["id"] as? String,
-                            url: item["url"] as? String,
-                            currentValue: item["current_value"] as? String,
-                            name: item["name"] as? String,
-                            description: item["description"] as? String,
-                            terms: item["terms"] as? String
-                        )
-                        offers.append(offer)
-                    }
-                }
-                
-            } catch {
-                print(error)
-            }
-        }
-    }
+//    func readJSONFromFile(fileName: String) {//consider a new class that handles all of this
+//        //look into codable, get offerdatamodel to conform to that
+//        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+//            do {
+//                let fileUrl = URL(fileURLWithPath: path)
+//                let data = try Data(contentsOf: fileUrl)
+//                let decoder = JSONDecoder()
+//                let offersDecoded = try decoder.decode(Array<OfferDataModel>.self, from: data)
+//
+//                offers = offersDecoded
+//
+//            } catch {
+//                print(error)
+//            }
+//        }
+//    }
 }
 
