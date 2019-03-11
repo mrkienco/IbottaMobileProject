@@ -8,8 +8,9 @@
 
 import Foundation
 
-class OffersAPI {
+class APIManager {
     
+    //how to do this in the background thread
     func readJSONFromFile(fileName: String) -> Array<OfferDataModel> {
         var offers = [OfferDataModel]()
         if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
@@ -26,7 +27,6 @@ class OffersAPI {
                 print(error)
             }
         }
-        
         return offers
     }
     

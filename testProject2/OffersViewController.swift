@@ -17,10 +17,6 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     let cellId = "Cell"
     
-//    let bottomMargin: CGFloat = 24
-//    let interMargin: CGFloat = 8
-//    let cellsPerRow = 2
-    
     let margin: CGFloat = 12
     let interMargin: CGFloat = 8
     let interItemSpacing: CGFloat = 8
@@ -38,9 +34,6 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         self.title = "Offers"
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.minimumInteritemSpacing = interMargin
-//        layout.minimumLineSpacing = bottomMargin
-        
         layout.minimumInteritemSpacing = interItemSpacing
         layout.minimumLineSpacing = 24
         
@@ -53,12 +46,9 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
 
         self.view.addSubview(collectionView)
         collectionView.edgeAnchors == self.view.edgeAnchors
-        
-
-        offers = OffersAPI().readJSONFromFile(fileName: "Offers")
-    }
     
-//    var offers = OffersAPI().readJSONFromFile(fileName: "Offers")
+        offers = APIManager().readJSONFromFile(fileName: "Offers")
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
          return offers.count
@@ -69,15 +59,6 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         offerDetailVC.offer = offers[indexPath.item]
         self.navigationController?.pushViewController(offerDetailVC, animated: true)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        //let width = (collectionView.bounds.size.width / CGFloat(cellsPerRow)) - (interMargin / 2)
-//        let width = (collectionView.bounds.size.width / CGFloat(cellsPerRow)) - (15) // possibly cellMargin / 2
-//        print("Width of device: \(collectionView.bounds.size.width)")
-//        print("Formula returns: \(width)")
-//        return CGSize(width: width, height: width)
-//    }
-    
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
@@ -106,22 +87,5 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
         return cell
     }
     
-    //how to do this in the background thread
-//    func readJSONFromFile(fileName: String) {//consider a new class that handles all of this
-//        //look into codable, get offerdatamodel to conform to that
-//        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
-//            do {
-//                let fileUrl = URL(fileURLWithPath: path)
-//                let data = try Data(contentsOf: fileUrl)
-//                let decoder = JSONDecoder()
-//                let offersDecoded = try decoder.decode(Array<OfferDataModel>.self, from: data)
-//
-//                offers = offersDecoded
-//
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
 }
 

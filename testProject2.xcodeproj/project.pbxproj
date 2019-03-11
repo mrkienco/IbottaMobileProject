@@ -17,7 +17,7 @@
 		E19A64AE222F045500D306AF /* OfferDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A64AD222F045500D306AF /* OfferDetailViewController.swift */; };
 		E19A64B0222F165D00D306AF /* OfferDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19A64AF222F165D00D306AF /* OfferDataModel.swift */; };
 		E1B39C392231B4AE0077E05E /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B39C382231B4AE0077E05E /* FavoritesManager.swift */; };
-		E1B39C3B2236D8660077E05E /* OffersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B39C3A2236D8660077E05E /* OffersAPI.swift */; };
+		E1B39C3B2236D8660077E05E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B39C3A2236D8660077E05E /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +35,7 @@
 		E19A64AD222F045500D306AF /* OfferDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferDetailViewController.swift; sourceTree = "<group>"; };
 		E19A64AF222F165D00D306AF /* OfferDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferDataModel.swift; sourceTree = "<group>"; };
 		E1B39C382231B4AE0077E05E /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
-		E1B39C3A2236D8660077E05E /* OffersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersAPI.swift; sourceTree = "<group>"; };
+		E1B39C3A2236D8660077E05E /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 				E19476B72229DF6600353E1D /* OfferCollectionViewCell.swift */,
 				E19A64AF222F165D00D306AF /* OfferDataModel.swift */,
 				E19A64AD222F045500D306AF /* OfferDetailViewController.swift */,
-				E1B39C3A2236D8660077E05E /* OffersAPI.swift */,
+				E1B39C3A2236D8660077E05E /* APIManager.swift */,
 				E19476A72229D7A100353E1D /* OffersViewController.swift */,
 				E1B39C382231B4AE0077E05E /* FavoritesManager.swift */,
 				E19476AC2229D7A400353E1D /* Assets.xcassets */,
@@ -231,7 +231,7 @@
 				E19476A62229D7A100353E1D /* AppDelegate.swift in Sources */,
 				E19476B82229DF6600353E1D /* OfferCollectionViewCell.swift in Sources */,
 				E1B39C392231B4AE0077E05E /* FavoritesManager.swift in Sources */,
-				E1B39C3B2236D8660077E05E /* OffersAPI.swift in Sources */,
+				E1B39C3B2236D8660077E05E /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
