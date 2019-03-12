@@ -9,7 +9,7 @@
 import UIKit
 import Anchorage
 
-class OfferDetailViewController: UIViewController {//unsure how to name this class
+class OfferDetailViewController: UIViewController {
     
     let defaults = UserDefaults.standard
     

@@ -10,24 +10,24 @@ import Foundation
 
 class APIManager {
     
-    //how to do this in the background thread
-    func readJSONFromFile(fileName: String) -> Array<OfferDataModel> {
-        var offers = [OfferDataModel]()
-        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
-            do {
-                let fileUrl = URL(fileURLWithPath: path)
-                let data = try Data(contentsOf: fileUrl)
-                let decoder = JSONDecoder()
-                let offersDecoded = try decoder.decode(Array<OfferDataModel>.self, from: data)
-                
-                offers = offersDecoded
-                
-                
-            } catch {
-                print(error)
+    func readJSONFromFile(onCompletion: @escaping (_ offers: [OfferDataModel]) -> Void ){
+        DispatchQueue.global().async {
+            let fileName = "Offers"
+            if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+                do {
+                    let fileUrl = URL(fileURLWithPath: path)
+                    let data = try Data(contentsOf: fileUrl)
+                    let decoder = JSONDecoder()
+                    let offersDecoded = try decoder.decode(Array<OfferDataModel>.self, from: data)
+                    DispatchQueue.main.async {
+                        onCompletion(offersDecoded)
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             }
         }
-        return offers
     }
     
 }

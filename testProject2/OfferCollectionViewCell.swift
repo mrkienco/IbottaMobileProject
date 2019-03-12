@@ -47,7 +47,6 @@ class OfferCollectionViewCell: UICollectionViewCell {
         self.addSubview(image)
         image.verticalAnchors == imageBackground.verticalAnchors + 6
         image.horizontalAnchors == imageBackground.horizontalAnchors + 6
-//        image.backgroundColor = #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)
         image.contentMode = .scaleAspectFit
         
         let favIcon = offerFavorited

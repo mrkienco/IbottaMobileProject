@@ -46,8 +46,12 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
 
         self.view.addSubview(collectionView)
         collectionView.edgeAnchors == self.view.edgeAnchors
-    
-        offers = APIManager().readJSONFromFile(fileName: "Offers")
+
+        APIManager().readJSONFromFile(onCompletion: { (offers) in
+            self.offers = offers
+            self.collectionView.reloadData()
+        })
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -71,13 +75,14 @@ class OffersViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //create variable for offers[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OfferCollectionViewCell
-        let imageUrl = URL(string: offers[indexPath.item].url ?? "")
-        let offerName = offers[indexPath.item].name ?? ""
-        let currentValue = offers[indexPath.item].currentValue ?? ""
         
-        let isFav = FavoritesManager().isFavorite(id: offers[indexPath.item].id!)
+        let offer = offers[indexPath.item]
+        let imageUrl = URL(string: offer.url ?? "")
+        let offerName = offer.name ?? ""
+        let currentValue = offer.currentValue ?? ""
+        
+        let isFav = FavoritesManager().isFavorite(id: offer.id!)
 
         cell.offerImage.sd_setImage(with: imageUrl)
         cell.offerCurrentValue.text = currentValue
